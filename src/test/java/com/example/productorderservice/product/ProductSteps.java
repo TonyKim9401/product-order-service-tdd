@@ -24,4 +24,15 @@ public class ProductSteps {
 
         return new AddProductRequest(name, price, discountPolicy);
     }
+
+    public static ExtractableResponse<Response> 상품수정요청(Long productId) {
+        return RestAssured.given().log().all()
+                .when()
+                .get("/products/{productId}", productId)
+                .then().log().all()
+                .extract();
+    }
+
+
+
 }
