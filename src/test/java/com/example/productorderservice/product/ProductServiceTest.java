@@ -39,5 +39,4 @@ public class ProductServiceTest {
         assertThat(productResponse.name()).isEqualTo("상품 수정");
         assertThat(productResponse.price()).isEqualTo(2000);
     }
-
 }
