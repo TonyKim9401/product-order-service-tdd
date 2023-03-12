@@ -34,5 +34,7 @@ public class ProductSteps {
     }
 
 
-
+    public static UpdateProductRequest 상품수정요청_생성() {
+        return new UpdateProductRequest("상품 수정", 2000, DiscountPolicy.NONE);
+    }
 }
