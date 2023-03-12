@@ -19,10 +19,6 @@ public class ProductServiceTest {
     @Autowired
     private ProductService productService;
 
-    @Autowired
-    private ProductPort productPort;
-
-
 
     @Test
     void 상품수정() {
