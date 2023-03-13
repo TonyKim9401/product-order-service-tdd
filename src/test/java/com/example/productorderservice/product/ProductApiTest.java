@@ -41,6 +41,7 @@ class ProductApiTest extends ApiTest {
         assertThat(response.jsonPath().getString("name")).isEqualTo("상품명");
     }
 
+
     @Test
     void 상품수정() {
 
