@@ -53,7 +53,6 @@ class ProductApiTest extends ApiTest {
 
         assertThat(response.statusCode()).isEqualTo(HttpStatus.OK.value());
         assertThat(productRepository.findById(1L).get().getName()).isEqualTo("상품 수정");
-
     }
 
     private static ExtractableResponse<Response> 상품등록요청(final long productId) {
