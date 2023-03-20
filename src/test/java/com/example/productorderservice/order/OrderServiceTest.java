@@ -52,6 +52,7 @@ public class OrderServiceTest {
             }
         }
 
+
     private class OrderService {
 
         private final OrderPort orderPort;
