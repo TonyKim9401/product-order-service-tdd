@@ -69,7 +69,6 @@ public class OrderApiTest extends ApiTest {
 //        orderService.createOrder(request);
 
 
-
     }
 
     private static CreateOrderRequest 상품주문요청_생성() {
