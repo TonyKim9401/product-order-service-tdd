@@ -70,6 +70,7 @@ public class OrderApiTest extends ApiTest {
 
     }
 
+
     private static CreateOrderRequest 상품주문요청_생성() {
         final Long productId = 1L;
         final int quantity = 2;
