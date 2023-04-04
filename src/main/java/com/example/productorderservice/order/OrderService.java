@@ -10,7 +10,6 @@ import org.springframework.web.bind.annotation.RestController;
 
 @RestController
 class OrderService {
-
     private final OrderPort orderPort;
 
     public OrderService(final OrderPort orderPort) {
