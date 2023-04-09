@@ -25,5 +25,4 @@ class OrderService {
         orderPort.save(order);
         return ResponseEntity.status(HttpStatus.CREATED).build();
     }
-
 }
