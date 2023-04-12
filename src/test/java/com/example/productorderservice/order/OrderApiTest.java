@@ -52,6 +52,7 @@ public class OrderApiTest extends ApiTest {
 
         assertThat(response.statusCode()).isEqualTo(HttpStatus.CREATED.value());
 
+
         /**
          * Spring Boot test
          */
