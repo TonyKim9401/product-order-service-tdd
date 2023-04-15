@@ -7,6 +7,9 @@ import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.springframework.util.Assert;
 
+import java.util.HashMap;
+import java.util.Map;
+
 class PaymentServiceTest {
 
     private PaymentService paymentService;
@@ -14,7 +17,7 @@ class PaymentServiceTest {
 
     @BeforeEach
     void setUp() {
-        paymentPort = new PaymentAdapter();
+        paymentPort = new PaymentAdapter(paymentGateway, paymentRepository);
         paymentService = new PaymentService(paymentPort);
     }
 
@@ -58,16 +61,38 @@ class PaymentServiceTest {
         void save(Payment payment);
     }
 
-    private record Payment(Order order, String cardNumber) {
-        private Payment {
+    private class Payment {
+
+        private Long id;
+        private final Order order;
+        private final String cardNumber;
+
+        public Payment(final Order order, final String cardNumber) {
             Assert.notNull(order, "주문은 필수입니다.");
             Assert.hasText(cardNumber, "카드 번호는 필수입니다.");
+            this.order = order;
+            this.cardNumber = cardNumber;
+
+        }
+
+        public void assignId(final Long id) {
+            this.id = id;
+        }
+
+        public Long getId() {
+            return id;
         }
     }
 
     private class PaymentAdapter implements PaymentPort {
 
-        private PaymentGateway paymentGateway;
+        private final PaymentGateway paymentGateway;
+        private final PaymentRepository paymentRepository;
+
+        private PaymentAdapter(PaymentGateway paymentGateway, PaymentRepository paymentRepository) {
+            this.paymentGateway = paymentGateway;
+            this.paymentRepository = paymentRepository;
+        }
 
         @Override
         public Order getOrder(Long orderId) {
@@ -81,7 +106,7 @@ class PaymentServiceTest {
 
         @Override
         public void save(Payment payment) {
-
+            paymentRepository.save(payment);
         }
     }
 
@@ -93,6 +118,16 @@ class PaymentServiceTest {
         @Override
         public void excute(Payment payment) {
             System.out.println("결제완료");
+        }
+    }
+
+    private class PaymentRepository {
+        private Map<Long, Payment> persistence = new HashMap<>();
+        private Long sequence = 0L;
+
+        public void save(final Payment payment) {
+            payment.assignId(++sequence);
+            persistence.put(payment.getId(), payment);
         }
     }
 }
