@@ -25,7 +25,7 @@ public class Order {
     private int quantity;
 
 
-    Order(final Product product, final int quantity) {
+    public Order(final Product product, final int quantity) {
         notNull(product, "상품은 필수입니다.");
         isTrue(quantity > 0, "수량은 0보다 커야 합니다.");
         this.product = product;

@@ -1,14 +1,22 @@
 package com.example.productorderservice.payment;
 
 import com.example.productorderservice.order.Order;
+import com.example.productorderservice.product.DiscountPolicy;
+import com.example.productorderservice.product.Product;
+import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.springframework.util.Assert;
-
-import java.security.spec.ECParameterSpec;
 
 class PaymentServiceTest {
 
     private PaymentService paymentService;
+    private PaymentPort paymentPort;
+
+    @BeforeEach
+    void setUp() {
+        paymentPort = new PaymentAdapter();
+        paymentService = new PaymentService(paymentPort);
+    }
 
     @Test
     void 상품주문() {
@@ -27,7 +35,11 @@ class PaymentServiceTest {
     }
 
     private class PaymentService {
-        private PaymentPort paymentPort;
+        private final PaymentPort paymentPort;
+
+        private PaymentService(PaymentPort paymentPort) {
+            this.paymentPort = paymentPort;
+        }
 
         public void payment(final PaymentRequest request) {
             Order order = paymentPort.getOrder(request.orderId);
@@ -50,6 +62,37 @@ class PaymentServiceTest {
         private Payment {
             Assert.notNull(order, "주문은 필수입니다.");
             Assert.hasText(cardNumber, "카드 번호는 필수입니다.");
+        }
+    }
+
+    private class PaymentAdapter implements PaymentPort {
+
+        private PaymentGateway paymentGateway;
+
+        @Override
+        public Order getOrder(Long orderId) {
+            return new Order(new Product("상품1", 1000, DiscountPolicy.NONE), 2);
+        }
+
+        @Override
+        public void pay(Payment payment) {
+            paymentGateway.excute(payment);
+        }
+
+        @Override
+        public void save(Payment payment) {
+
+        }
+    }
+
+    private interface PaymentGateway {
+        void excute(Payment payment);
+    }
+
+    public class ConsolePaymentGateway implements PaymentGateway {
+        @Override
+        public void excute(Payment payment) {
+            System.out.println("결제완료");
         }
     }
 }
