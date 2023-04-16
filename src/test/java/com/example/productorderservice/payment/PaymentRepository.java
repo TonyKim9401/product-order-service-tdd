@@ -1,8 +1,11 @@
 package com.example.productorderservice.payment;
 
+import org.springframework.stereotype.Component;
+
 import java.util.HashMap;
 import java.util.Map;
 
+@Component
 class PaymentRepository {
     private Map<Long, Payment> persistence = new HashMap<>();
     private Long sequence = 0L;
