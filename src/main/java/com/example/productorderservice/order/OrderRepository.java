@@ -5,7 +5,7 @@ import org.springframework.data.jpa.repository.JpaRepository;
 import java.util.HashMap;
 import java.util.Map;
 
-interface OrderRepository extends JpaRepository<Order, Long> {
+public interface OrderRepository extends JpaRepository<Order, Long> {
 
 
     /*private Map<Long, Order> persistence = new HashMap<>();
