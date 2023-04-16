@@ -1,17 +1,17 @@
 package com.example.productorderservice.payment;
 
+import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Component;
 
 import java.util.HashMap;
 import java.util.Map;
 
-@Component
-class PaymentRepository {
-    private Map<Long, Payment> persistence = new HashMap<>();
+interface PaymentRepository extends JpaRepository<Payment, Long> {
+    /*private Map<Long, Payment> persistence = new HashMap<>();
     private Long sequence = 0L;
 
     public void save(final Payment payment) {
         payment.assignId(++sequence);
         persistence.put(payment.getId(), payment);
-    }
+    }*/
 }
