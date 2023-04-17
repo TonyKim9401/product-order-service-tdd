@@ -1,9 +1,7 @@
-package com.example.productorderservice.order;
+package com.example.productorderservice.order.adapter;
 
+import com.example.productorderservice.order.domain.Order;
 import org.springframework.data.jpa.repository.JpaRepository;
-
-import java.util.HashMap;
-import java.util.Map;
 
 public interface OrderRepository extends JpaRepository<Order, Long> {
 
