@@ -8,7 +8,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.http.ResponseEntity;
 
-import static org.assertj.core.api.Assertions.*;
+import static org.assertj.core.api.Assertions.assertThat;
 
 
 @SpringBootTest
@@ -16,7 +16,6 @@ public class ProductServiceTest {
 
     @Autowired
     private ProductService productService;
-
 
     @Test
     void 상품수정() {
@@ -32,6 +31,7 @@ public class ProductServiceTest {
         final GetProductResponse productResponse = response.getBody();
         assertThat(productResponse.name()).isEqualTo("상품 수정");
         assertThat(productResponse.price()).isEqualTo(2000);
+
     }
 
 }
