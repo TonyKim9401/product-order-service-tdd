@@ -1,4 +1,4 @@
-package com.example.productorderservice.order;
+package com.example.productorderservice.order.application.service;
 
 import static org.springframework.util.Assert.isTrue;
 import static org.springframework.util.Assert.notNull;
