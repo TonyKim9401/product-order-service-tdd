@@ -27,6 +27,7 @@ class ProductService {
         return ResponseEntity.status(HttpStatus.CREATED).build();
     }
 
+
     @GetMapping("/{productId}")
     public ResponseEntity<GetProductResponse> getProduct(@PathVariable final Long productId) {
         final Product product = productPort.getProduct(productId);
@@ -37,6 +38,7 @@ class ProductService {
                 product.getDiscountPolicy());
         return ResponseEntity.ok(response);
     }
+
 
     @PatchMapping("/{productId}")
     @Transactional
